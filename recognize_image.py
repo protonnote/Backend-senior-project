@@ -12,6 +12,7 @@ from flask import jsonify
 from os import listdir
 from os.path import join
 from datetime import datetime
+import write_log as wr
 
 # construct the argument parser and parse the arguments
 # ap = argparse.ArgumentParser()
@@ -41,6 +42,7 @@ def Prediction():
 		imagePath = testImg[0]
 		# load the image, resize it to have a width of 600 pixels (while maintaining the aspect ratio), and then grab the image dimensions
 		image = cv2.imread(imagePath)
+		# image = cv2.imread("upload/image_1_10_56_24.png")
 		image = imutils.resize(image, width=600)
 		(h, w) = image.shape[:2]
 
@@ -85,7 +87,7 @@ def Prediction():
 				proba = preds[j]
 				# name = le.classes_[j]
 
-				re_obj = {'Name':[],'Percent':[],'Time':''}
+				re_obj = {'filename':'','Name':[],'Percent':[],'Time':''}
 
 				for i in range(len(le.classes_)) :
 					re_obj['Name'].append(le.classes_[i]) 
@@ -93,11 +95,16 @@ def Prediction():
 					# text = "{}: {:.2f}%".format(le.classes_[i], preds[i] * 100)
 					# print(text)
 				# print(le.classes_)
+				fname = imagePath.split('/')
+				re_obj['filename'] = fname[1]
 				re_obj['Time'] = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-
+				print(re_obj)
 				# sort_orders = dict(sorted(re_obj.items(), key=lambda x: x[1], reverse=True))
 				# print(re_obj)
-		return jsonify(re_obj)
+		flag = wr.save_log(re_obj)
+		if flag :
+			return jsonify(re_obj)
+		# return re_obj
 
 			# draw the bounding box of the face along with the associated probability
 			# y = startY - 10 if startY - 10 > 10 else startY + 10
@@ -109,3 +116,6 @@ def Prediction():
 	# show the output image
 	# cv2.imshow("Image", image)
 	# cv2.waitKey(0)
+
+
+# print(Prediction())

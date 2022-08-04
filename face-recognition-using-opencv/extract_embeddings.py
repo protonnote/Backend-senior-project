@@ -9,17 +9,17 @@ import os
 
 # load serialized face detector
 print("Loading Face Detector...")
-protoPath = "./face_detection_model/deploy.prototxt"
-modelPath = "./face_detection_model/res10_300x300_ssd_iter_140000.caffemodel"
+protoPath = "face-recognition-using-opencv/face_detection_model/deploy.prototxt"
+modelPath = "face-recognition-using-opencv/face_detection_model/res10_300x300_ssd_iter_140000.caffemodel"
 detector = cv2.dnn.readNetFromCaffe(protoPath, modelPath)
 
 # load serialized face embedding model
 print("Loading Face Recognizer...")
-embedder = cv2.dnn.readNetFromTorch("openface_nn4.small2.v1.t7")
+embedder = cv2.dnn.readNetFromTorch("face-recognition-using-opencv/openface_nn4.small2.v1.t7")
 
 # grab the paths to the input images in our dataset
 print("Quantifying Faces...")
-imagePaths = list(paths.list_images("dataset"))
+imagePaths = list(paths.list_images("face-recognition-using-opencv/dataset"))
 
 # initialize our lists of extracted facial embeddings and corresponding people names
 knownEmbeddings = []
@@ -83,6 +83,6 @@ for (i, imagePath) in enumerate(imagePaths):
 # dump the facial embeddings + names to disk
 print("[INFO] serializing {} encodings...".format(total))
 data = {"embeddings": knownEmbeddings, "names": knownNames}
-f = open("output/embeddings.pickle", "wb")
+f = open("face-recognition-using-opencv/output/embeddings.pickle", "wb")
 f.write(pickle.dumps(data))
 f.close()

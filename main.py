@@ -6,6 +6,7 @@ from flask import Flask, request, redirect, jsonify
 from werkzeug.utils import secure_filename
 import recognize_image as predict
 import move_file as mv
+import call_com as cc
 
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
@@ -52,7 +53,9 @@ def confirm():
 		name = request.json['name']
 		mv.move(name)
 	elif request.json['status'] == "NO" :
-		mv.move_if_no()	
+		mv.move_if_no(request.json['code']) #to be fix
+	elif request.json['status'] == "OTHER" :
+		mv.move_if_other()
 	else : 
 		resp = jsonify({'message' : 'Fail'})
 		resp.status_code = 400
@@ -60,6 +63,12 @@ def confirm():
 	resp = jsonify({'message' : 'Done'})
 	resp.status_code = 201
 	return resp
+
+@app.route('/train')
+def train():
+	q = request.args.get('q')
+	cc.train_model()
+	return { "message": "train success" }, 201
 
 
 if __name__ == "__main__" :
