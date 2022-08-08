@@ -28,11 +28,6 @@ def move_if_other():
     Imgpath = "upload/"
     testImg = [Imgpath + f for f in listdir(Imgpath)]
     if len(testImg) == 1 :
-        # check code to name
-
-        # todo
-        
-
 
         imagePath = testImg[0]
         split_file = imagePath.split("/")

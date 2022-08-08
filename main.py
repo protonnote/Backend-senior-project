@@ -54,7 +54,7 @@ def confirm():
 		mv.move(name)
 	elif request.json['status'] == "NO" :
 		mv.move_if_no(request.json['code']) #to be fix
-	elif request.json['status'] == "OTHER" :
+	elif request.json['status'] == "IDLE" :
 		mv.move_if_other()
 	else : 
 		resp = jsonify({'message' : 'Fail'})
