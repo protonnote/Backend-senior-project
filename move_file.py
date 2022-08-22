@@ -12,23 +12,35 @@ def move(Result_name):
         imagePath = testImg[0]
         split_file = imagePath.split("/")
         shutil.move( imagePath ,"face-recognition-using-opencv/dataset/" + Result_name.lower()+ "/" + split_file[1])
-    # print(imagePath)
+        print("Move complete.")
+    else: print("Upload is empty.!!")
 
-def move_if_no(code):
+def move_if_no(code : int):
     Imgpath = "upload/"
     testImg = [Imgpath + f for f in listdir(Imgpath)]
-    flag, name = wr.read_log(code)
-    if len(testImg) == 1 and flag :
+    flag, name = wr.read_log(int(code))
+    print("validate:",flag,name)
+    if len(testImg) == 1 and flag == 1:
+        print("code {} correct.!!".format(code))
         imagePath = testImg[0]
         split_file = imagePath.split("/")
         shutil.move( imagePath ,"face-recognition-using-opencv/dataset/" + name.lower()+ "/" + split_file[1])
+        print("Move complete.")
+    else: 
+        print("code {} incorrect.!!".format(code))
+        imagePath = testImg[0]
+        split_file = imagePath.split("/")
+        shutil.move( imagePath ,"face-recognition-using-opencv/other_dataset/" + split_file[1])
+        print("Move complete.")
 
 
 def move_if_other():
     Imgpath = "upload/"
     testImg = [Imgpath + f for f in listdir(Imgpath)]
     if len(testImg) == 1 :
-
+        print("Nothing")
         imagePath = testImg[0]
         split_file = imagePath.split("/")
         shutil.move( imagePath ,"face-recognition-using-opencv/other_dataset/" + split_file[1])
+        print("Move complete.")
+    else: print("Upload is empty.!!")

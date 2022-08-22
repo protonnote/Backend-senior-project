@@ -35,9 +35,16 @@ def read_log(code):
         with open(filename) as fp:
             listObj = json.load(fp)
         
+        re_bool = False
+        re_name = "None"
+
         for i in range(len(listObj)):
             if int(listObj[i]['Code']) == code :
-                return True, listObj[i]['Name']
+                re_bool = True
+                re_name = listObj[i]['Code']
+
+
+        return re_bool, re_name
 
         # return True, len(listObj)
 

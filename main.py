@@ -50,11 +50,16 @@ def upload_file():
 @app.route('/confirm', methods=['POST'])
 def confirm():
 	if request.json['status'] == "YES" :
+		print("YES case.")
 		name = request.json['name']
 		mv.move(name)
 	elif request.json['status'] == "NO" :
-		mv.move_if_no(request.json['code']) #to be fix
+		print("NO case.")
+		code = request.json['code']
+		# print(code)
+		mv.move_if_no(int(code))
 	elif request.json['status'] == "IDLE" :
+		print("IDLE case.")
 		mv.move_if_other()
 	else : 
 		resp = jsonify({'message' : 'Fail'})
