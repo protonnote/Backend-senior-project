@@ -7,6 +7,18 @@ from werkzeug.utils import secure_filename
 import recognize_image as predict
 import move_file as mv
 import call_com as cc
+import threading
+import time
+import datetime
+
+def auto_train():
+	day_counter = 1
+	while True:
+		print(f"Day : {day_counter}, Time : {datetime.datetime.now()}")
+		cc.train_model()
+		day_counter += 1
+		time.sleep(86400)
+
 
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
@@ -77,4 +89,5 @@ def train():
 
 
 if __name__ == "__main__" :
-    app.run(host="0.0.0.0",port=5000,debug=True)
+	threading.Thread(target=auto_train, daemon=True).start()
+	app.run(host="0.0.0.0",port=5000,debug=True)
