@@ -6,16 +6,18 @@ from flask import Flask, request, redirect, jsonify
 from werkzeug.utils import secure_filename
 import recognize_image as predict
 import move_file as mv
-import call_com as cc
 import threading
 import time
 import datetime
+import extract_train_model as train_model
 
 def auto_train():
+	print("start")
 	day_counter = 1
 	while True:
 		print(f"Day : {day_counter}, Time : {datetime.datetime.now()}")
-		cc.train_model()
+		train_model.run_embedding()
+		train_model.run_train()
 		day_counter += 1
 		time.sleep(86400)
 
@@ -83,8 +85,10 @@ def confirm():
 
 @app.route('/train')
 def train():
+	print("Train case")
 	q = request.args.get('q')
-	cc.train_model()
+	train_model.run_embedding()
+	train_model.run_train()
 	return { "message": "train success" }, 201
 
 
