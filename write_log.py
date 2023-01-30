@@ -24,34 +24,21 @@ def save_log(dic):
         print(e)
         return False
 
-def read_log(code):
+def read_log(pin_code):
     filename = 'user_database.json'
     listObj = []
-    try:
-        return _extracted_from_read_log_5(filename, code)
-            # return True, len(listObj)
-
-    except Exception as e :
-        print(e)
-        return False,"None"
-
-
-# TODO Rename this here and in `read_log`
-def _extracted_from_read_log_5(filename, code):
-    if path.isfile(filename) is False:
-        raise Exception("File not found")
-
-    # # Read JSON file
-    with open(filename) as fp:
-        listObj = json.load(fp)
-
     re_bool = False
     re_name = "None"
 
-    for i in range(len(listObj)):
-        if int(listObj[i]['Code']) == code :
-            re_bool = True
-            re_name = listObj[i]['Code']
+    with open(filename) as fp:
+        listObj = json.load(fp)
 
+    # print(listObj)
+
+    for i in listObj:
+        if i['Pin'] == pin_code :
+            re_bool = True
+            re_name = i['Name']
 
     return re_bool, re_name
+

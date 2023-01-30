@@ -63,25 +63,31 @@ def upload_file():
 
 @app.route('/confirm', methods=['POST'])
 def confirm():
-	if request.json['status'] == "YES" :
+	if request.json['status'] == "YES":
 		print("YES case.")
 		name = request.json['name']
 		mv.move(name)
-	elif request.json['status'] == "NO" :
+		resp = jsonify({'message' : 'Done'})
+		resp.status_code = 201
+	elif request.json['status'] == "NO":
 		print("NO case.")
 		code = request.json['code']
-		# print(code)
-		mv.move_if_no(int(code))
-	elif request.json['status'] == "IDLE" :
+		if check_pin := mv.move_if_no(int(code)):
+			resp = jsonify({'message' : 1})
+		else:
+			resp = jsonify({'message' : 0})
+		resp.status_code = 201
+	elif request.json['status'] == "IDLE":
 		print("IDLE case.")
 		mv.move_if_other()
-	else : 
+		resp = jsonify({'message' : 'Done IDLE case'})
+		resp.status_code = 201
+	else: 
 		resp = jsonify({'message' : 'Fail'})
 		resp.status_code = 400
-		return resp
-	resp = jsonify({'message' : 'Done'})
-	resp.status_code = 201
+
 	return resp
+
 
 @app.route('/train')
 def train():

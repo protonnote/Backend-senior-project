@@ -13,12 +13,19 @@
 
 # print(emp_sort)
 
-import write_log as wr
+# import write_log as wr
 
-dd = {"Name": ["jobs","note","prayut"],"Percent": [5.84,22.46,71.7],"Time": "25/07/2022 18:40:37"}
+# dd = {"Name": ["jobs","note","prayut"],"Percent": [5.84,22.46,71.7],"Time": "25/07/2022 18:40:37"}
 
-flag, name = wr.read_log(int(123456))
-print(flag)
-print(name)
-# print(wr.save_log(dd))
-# print(wr.read_log(str(123456)))
+# flag, name = wr.read_log(int(123456))
+# print(flag)
+# print(name)
+# # print(wr.save_log(dd))
+# # print(wr.read_log(str(123456)))
+
+# import write_log as wr
+
+
+# print(wr.read_log(123456))
+# print(wr.read_log(456123))
+# print(wr.read_log(456124))
