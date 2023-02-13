@@ -18,6 +18,7 @@ def auto_train():
 		print(f"Day : {day_counter}, Time : {datetime.datetime.now()}")
 		train_model.run_embedding()
 		train_model.run_train()
+		# predict.reload()
 		day_counter += 1
 		time.sleep(86400)
 
@@ -95,6 +96,7 @@ def train():
 	q = request.args.get('q')
 	train_model.run_embedding()
 	train_model.run_train()
+	# predict.reload()
 	return { "message": "train success" }, 201
 
 

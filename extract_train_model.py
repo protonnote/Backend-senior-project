@@ -61,7 +61,7 @@ def run_embedding():
 			confidence = detections[0, 0, i, 2]
 
 			# ensure that the detection with the largest probability also means our minimum probability test (thus helping filter out weak detections)
-			if confidence > 0.5:
+			if confidence > 0.65:
 				# compute the (x, y)-coordinates of the bounding box for the face
 				box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
 				(startX, startY, endX, endY) = box.astype("int")
@@ -87,6 +87,8 @@ def run_embedding():
 
 	# dump the facial embeddings + names to disk
 	print(f"[INFO] serializing {total} encodings...")
+	le = pickle.loads(open('face-recognition-using-opencv/output/le.pickle', "rb").read())
+	print(le.classes_)
 	data = {"embeddings": knownEmbeddings, "names": knownNames}
 	with open("face-recognition-using-opencv/output/embeddings.pickle", "wb") as f:
 		f.write(pickle.dumps(data))
@@ -112,3 +114,4 @@ def run_train():
         f.write(pickle.dumps(recognizer))
     with open("face-recognition-using-opencv/output/le.pickle", "wb") as f:
         f.write(pickle.dumps(le))
+
