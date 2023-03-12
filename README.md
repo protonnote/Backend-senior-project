@@ -44,3 +44,15 @@ After use `` git colne `` command for download this repository.
     app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 ```
 3. Use command : `` python main.py `` for start server.
+
+For manage dataset can copy user dataset to ``dataset`` folder
+```bash
+:./face-recognition-using-opencv
+├───dataset
+│   ├───User 1
+│   ├───User 2
+│   ├───User 3
+│   ├───...
+├───face_detection_model
+├───other_dataset
+```
