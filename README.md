@@ -31,8 +31,8 @@
 ## Usage ##
 After use `` git colne `` command for download this repository.
 1. Open PowerShell or Windows Terminal.
-2. Edit ``UPLOAD_FOLDER`` to ``upload`` folder path.
- *you can use these command to see upload directory ``pwd`` command.
+2. Edit ``UPLOAD_FOLDER`` to ``upload`` folder path. \
+ **can use ``pwd`` command to see upload directory.
 ```python
     from flask import Flask
 
