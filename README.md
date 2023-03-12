@@ -12,7 +12,7 @@
 
 - **Flask framework**
     1. Open Windows Terminal or PowerShell.
-    2. Use command : `` pip install Flask ``
+    2. Use command : `` pip install Flask ``.
 
 - **OpenCV on Windows**
     1. Open PowerShell or Windows Terminal.
