@@ -18,7 +18,6 @@ def auto_train():
 		print(f"Day : {day_counter}, Time : {datetime.datetime.now()}")
 		train_model.run_embedding()
 		train_model.run_train()
-		# predict.reload()
 		day_counter += 1
 		time.sleep(86400)
 
