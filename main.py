@@ -1,6 +1,5 @@
 # from crypt import methods
 import os
-import urllib.request
 from app import app
 from flask import Flask, request, redirect, jsonify
 from werkzeug.utils import secure_filename
@@ -95,7 +94,6 @@ def train():
 	q = request.args.get('q')
 	train_model.run_embedding()
 	train_model.run_train()
-	# predict.reload()
 	return { "message": "train success" }, 201
 
 
